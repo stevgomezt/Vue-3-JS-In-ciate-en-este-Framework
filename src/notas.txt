@@ -1,0 +1,21 @@
+node : todos los paquetes o dependencias que necesita Vue para funcionar.
+public : contiene el index de nuestra app
+src : es donde vamos a construir la app
+assets : archivos multimedia
+components : todos los componentes de la app
+
+Estructura de un componente
+
+siempre terminan con la extencion .vue
+template : es todo el html
+script : toda la logica, variables, funciones, etc 
+styles : estilos 
+
+Los componentes se importan entre si dentro de la seccion (script) del componente que lo va a utilizar y se usa dentro de la seccion (template)
+
+main.js : es el primer fichero que se ejecuta al ejecutar la app
+          dentro de este se pueden importar componentes o estilos globales
+
+Creacion de componentes y usos
+
+V-for : sirve para recorrer bucles y renderizarlos en el template
