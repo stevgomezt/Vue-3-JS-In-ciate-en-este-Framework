@@ -1,59 +1,52 @@
 <template>
     <div>
-        <h2>Componente car.vue</h2>
+        <h2>PasarProps</h2>
         <p>Marca: {{ brand }}</p>
-        <p>
-            Modelo
-            <!-- asigna key unica cuando existen valores repetidos -->
-            <span v-for="(modelo, index) in modelos" :key="modelo">
-                <!-- asigna key unica cuando los valores son distintos -->
-                <!-- <span v-for="modelo in modelos" :key="modelo"> -->
-                {{ modelo }}
-            </span>
-        </p>
-        <p>Colores: {{ color }}</p>
-        <p>Color Seleccionado: {{ color[0] }}</p>
-        <p>Titulo: {{ mensaje.title }}</p>
-        <p>Titulo: {{ mensaje.text1 }}</p>
-        <p>Titulo: {{ mensaje.text2 }}</p>
-        <p>Titulo: {{ mensaje.text3 }}</p>
+        <p>Modelo: {{ model }}</p>
+        <p>Potencia: {{ power }}</p>
+        <button @click="upPower">Aumentar...</button>
+        <button @click="downPower">Disminuir...</button>
+        <h2>Botones Emit</h2>
+        <button @click="upPowerEmitFn">Aumentar Emit...</button>
+        <button @click="downPowerEmitFn">Disminuir Emit...</button>
     </div>
 </template>
 
 <script>
 export default {
-    // V2
-    // data() {
-    //     return {
-    //         brand: "audi",
-    //         modelo: "A4",
-    //         color: ["azul", "blanco", "rojo"], //Variable tipo array
-    //         mensaje: {
-    //             title: "Titulo",
-    //             text1: "Mensaje1",
-    //             text2: "Mensaje2",
-    //             text3: "Mensaje3",
-    //         }, //Variable de tipo objeto
-    //     };
-    // },
-
     //V3
-    setup() {
+    props: {
+        power: {
+            type: Number,
+            default: 0,
+        },
+
+        upPower: Function,
+
+        downPower: Function,
+    },
+
+    emits: ["downPowerEmit"],
+
+    setup(props, context) {
         const brand = "audi";
-        const modelos = ["A4", "R8", "Q3"];
-        const color = ["azul", "blanco", "rojo"]; //Variable tipo array
-        const mensaje = {
-            title: "Titulo",
-            text1: "Mensaje1",
-            text2: "Mensaje2",
-            text3: "Mensaje3",
-        }; //Variable de tipo objeto
+        const model = "A4";
+
+        // console.log(props);
+
+        const upPowerEmitFn = () => {
+            context.emit("upPowerEmit");
+        };
+
+        const downPowerEmitFn = () => {
+            context.emit("downPowerEmit");
+        };
 
         return {
             brand,
-            modelos,
-            color,
-            mensaje,
+            model,
+            upPowerEmitFn,
+            downPowerEmitFn,
         };
     },
 };
